@@ -32,7 +32,7 @@ export const businessConfig = {
       title: "Маникюр + Покрытие",
       price: 1800,
       description: "Аппаратный маникюр, выравнивание, покрытие гель-лак.",
-      image: "https://picsum.photos/seed/nails/600/400"
+      image: "https://loremflickr.com/800/600/manicure,nails/all"
     },
     {
       id: 2,
@@ -40,14 +40,14 @@ export const businessConfig = {
       price: 3000,
       isPopular: true,
       description: "Стойкий образ для особого случая. Ресницы включены.",
-      image: "https://picsum.photos/seed/makeup/600/400"
+      image: "https://loremflickr.com/800/600/makeup,model/all"
     },
     {
       id: 3,
       title: "Укладка Локоны",
       price: 2000,
       description: "Голливудская волна или серф-локоны. Стайлинг премиум.",
-      image: "https://picsum.photos/seed/hair/600/400"
+      image: "https://loremflickr.com/800/600/hairstyle,blonde/all"
     }
   ]
 };
