@@ -1,23 +1,34 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { businessConfig } from '../config/business';
+import TimePicker from './TimePicker';
 
-export default function BookingModal({ service, onClose }) {
+export default function BookingModal({ services, onRemoveService, onClose }) {
   const { theme, currency, telegramAdmin } = businessConfig;
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     date: '',
-    time: ''
+    time: '12:00'
   });
+
+  const totalPrice = services.reduce((sum, service) => sum + service.price, 0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if (services.length === 0) {
+      alert('Выберите хотя бы одну услугу');
+      return;
+    }
     
     // Haptic feedback
     if (navigator.vibrate) {
       navigator.vibrate([10, 50, 10]);
     }
+    
+    // Формируем список услуг
+    const servicesList = services.map(s => `• ${s.title} — ${s.price} ${currency}`).join('\n');
     
     // Формируем сообщение для Telegram
     const message = `
@@ -27,8 +38,11 @@ export default function BookingModal({ service, onClose }) {
 📱 *Телефон:* ${formData.phone}
 📅 *Дата:* ${formData.date}
 🕐 *Время:* ${formData.time}
-💅 *Услуга:* ${service.title}
-💰 *Цена:* ${service.price} ${currency}
+
+💅 *Услуги:*
+${servicesList}
+
+💰 *Итого:* ${totalPrice} ${currency}
     `.trim();
 
     // Открываем Telegram с готовым сообщением
@@ -45,6 +59,13 @@ export default function BookingModal({ service, onClose }) {
     });
   };
 
+  const handleTimeChange = (time) => {
+    setFormData({
+      ...formData,
+      time: time
+    });
+  };
+
   const handleClose = () => {
     if (navigator.vibrate) {
       navigator.vibrate(5);
@@ -52,7 +73,12 @@ export default function BookingModal({ service, onClose }) {
     onClose();
   };
 
-  const isFormValid = formData.name && formData.phone && formData.date && formData.time;
+  const handleRemove = (serviceId) => {
+    if (navigator.vibrate) navigator.vibrate(5);
+    onRemoveService(serviceId);
+  };
+
+  const isFormValid = formData.name && formData.phone && formData.date && formData.time && services.length > 0;
 
   return (
     <AnimatePresence>
@@ -61,133 +87,170 @@ export default function BookingModal({ service, onClose }) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-end md:items-center justify-center p-0 md:p-4 z-50"
+        className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-0"
         onClick={handleClose}
       >
         <motion.div
-          initial={{ y: '100%', opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: '100%', opacity: 0 }}
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.95, opacity: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           onClick={(e) => e.stopPropagation()}
-          className={`${theme.cardBg} rounded-t-3xl md:rounded-3xl max-w-md w-full p-6 relative shadow-2xl`}
+          className={`${theme.cardBg} w-full h-full md:h-auto md:max-h-[90vh] md:w-[600px] md:rounded-3xl overflow-y-auto shadow-2xl relative`}
         >
-          <motion.button
-            whileHover={{ scale: 1.1, rotate: 90 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={handleClose}
-            className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-3xl w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-all duration-300"
-          >
-            ×
-          </motion.button>
-          
-          <h2 className={`text-2xl font-bold mb-4 ${theme.text} tracking-wide`}>
-            Запись на услугу
-          </h2>
-          
-          <motion.div
-            initial={{ scale: 0.95 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.1 }}
-            className="mb-6 p-4 bg-gradient-to-r from-rose-50 to-pink-50 rounded-2xl border border-rose-100"
-          >
-            <h3 className="font-semibold text-slate-800 mb-1">{service.title}</h3>
-            <p className="text-slate-600 text-sm mb-2">{service.description}</p>
-            <p className="text-xl font-bold text-rose-600">
-              {service.price} {currency}
-            </p>
-          </motion.div>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <motion.div
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.15 }}
-            >
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                Ваше имя
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-rose-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all duration-300"
-                placeholder="Анна"
-                required
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                Телефон
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-rose-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all duration-300"
-                placeholder="+7 (999) 123-45-67"
-                required
-              />
-            </motion.div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <motion.div
-                initial={{ x: -20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.25 }}
-              >
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                  Дата
-                </label>
-                <input
-                  type="date"
-                  name="date"
-                  value={formData.date}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-rose-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all duration-300"
-                  required
-                />
-              </motion.div>
-
-              <motion.div
-                initial={{ x: -20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.3 }}
-              >
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                  Время
-                </label>
-                <input
-                  type="time"
-                  name="time"
-                  value={formData.time}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-rose-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all duration-300"
-                  required
-                />
-              </motion.div>
-            </div>
-
+          {/* Header - Sticky */}
+          <div className="sticky top-0 bg-white/95 backdrop-blur-xl z-10 px-6 py-4 border-b border-rose-100 flex items-center justify-between">
+            <h2 className={`text-2xl font-bold ${theme.text} font-serif`}>
+              Корзина ({services.length})
+            </h2>
             <motion.button
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.35 }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              disabled={!isFormValid}
-              className="w-full bg-gradient-to-r from-rose-400 to-rose-500 text-white py-3.5 rounded-xl font-semibold shadow-lg shadow-rose-300/50 hover:shadow-xl hover:shadow-rose-300/60 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+              whileHover={{ scale: 1.1, rotate: 90 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={handleClose}
+              className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors text-slate-400 hover:text-slate-600 text-2xl"
             >
-              Отправить заявку в Telegram
+              ×
             </motion.button>
-          </form>
+          </div>
+
+          {/* Content */}
+          <div className="px-6 py-6 space-y-6">
+            {/* Services List */}
+            {services.length > 0 ? (
+              <div className="space-y-3">
+                <h3 className="text-sm font-semibold text-slate-700 mb-3">Выбранные услуги</h3>
+                {services.map((service) => (
+                  <motion.div
+                    key={service.id}
+                    initial={{ scale: 0.95, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.95, opacity: 0 }}
+                    className="flex items-center justify-between p-4 bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl border border-rose-100"
+                  >
+                    <div className="flex-1">
+                      <h4 className="font-bold text-slate-800">{service.title}</h4>
+                      <p className="text-sm text-slate-600">{service.description}</p>
+                      <p className="text-lg font-bold text-rose-600 mt-1">
+                        {service.price} {currency}
+                      </p>
+                    </div>
+                    <motion.button
+                      whileTap={{ scale: 0.9 }}
+                      onClick={() => handleRemove(service.id)}
+                      className="ml-4 w-10 h-10 flex items-center justify-center rounded-full bg-red-100 hover:bg-red-200 text-red-600 transition-colors"
+                    >
+                      🗑️
+                    </motion.button>
+                  </motion.div>
+                ))}
+
+                {/* Total */}
+                <div className="pt-4 border-t-2 border-rose-200">
+                  <div className="flex justify-between items-center">
+                    <span className="text-lg font-semibold text-slate-700">Итого:</span>
+                    <span className="text-3xl font-bold text-rose-600">{totalPrice} {currency}</span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="text-center py-8">
+                <p className="text-slate-400">Корзина пуста. Выберите услуги для записи.</p>
+              </div>
+            )}
+
+            {/* Form */}
+            {services.length > 0 && (
+              <form onSubmit={handleSubmit} className="space-y-6 pt-6 border-t-2 border-rose-100">
+                {/* Name */}
+                <motion.div
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.15 }}
+                >
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Ваше имя
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 border-2 border-rose-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all text-lg"
+                    placeholder="Анна"
+                    required
+                  />
+                </motion.div>
+
+                {/* Phone */}
+                <motion.div
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Телефон
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 border-2 border-rose-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all text-lg"
+                    placeholder="+7 (999) 123-45-67"
+                    required
+                  />
+                </motion.div>
+
+                {/* Date */}
+                <motion.div
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.25 }}
+                >
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Дата
+                  </label>
+                  <input
+                    type="date"
+                    name="date"
+                    value={formData.date}
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 border-2 border-rose-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all text-lg"
+                    required
+                  />
+                </motion.div>
+
+                {/* Time Picker */}
+                <motion.div
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <label className="block text-sm font-semibold text-slate-700 mb-4">
+                    Время
+                  </label>
+                  <TimePicker value={formData.time} onChange={handleTimeChange} />
+                </motion.div>
+
+                {/* Submit Button */}
+                <motion.button
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.35 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  type="submit"
+                  disabled={!isFormValid}
+                  className="w-full bg-gradient-to-r from-rose-400 to-rose-500 text-white py-5 rounded-xl font-bold text-lg shadow-lg shadow-rose-300/50 hover:shadow-xl hover:shadow-rose-300/60 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+                >
+                  Отправить заявку в Telegram
+                </motion.button>
+              </form>
+            )}
+          </div>
+
+          {/* Bottom Padding */}
+          <div className="h-6"></div>
         </motion.div>
       </motion.div>
     </AnimatePresence>

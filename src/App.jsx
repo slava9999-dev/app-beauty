@@ -12,7 +12,8 @@ import Gallery from './components/Gallery';
 
 function App() {
   const { services, theme, name, telegramAdmin } = businessConfig;
-  const [selectedService, setSelectedService] = useState(null);
+  const [selectedServices, setSelectedServices] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -24,11 +25,21 @@ function App() {
   }, []);
 
   const handleBook = (service) => {
-    setSelectedService(service);
+    // Добавляем услугу в корзину, если её там ещё нет
+    if (!selectedServices.find(s => s.id === service.id)) {
+      setSelectedServices([...selectedServices, service]);
+      if (navigator.vibrate) navigator.vibrate(10);
+    }
+    setIsModalOpen(true);
+  };
+
+  const handleRemoveService = (serviceId) => {
+    setSelectedServices(selectedServices.filter(s => s.id !== serviceId));
+    if (navigator.vibrate) navigator.vibrate(5);
   };
 
   const closeModal = () => {
-    setSelectedService(null);
+    setIsModalOpen(false);
   };
 
   const scrollToServices = () => {
@@ -145,9 +156,10 @@ function App() {
           </footer>
 
           {/* Booking Modal */}
-          {selectedService && (
+          {isModalOpen && (
             <BookingModal
-              service={selectedService}
+              services={selectedServices}
+              onRemoveService={handleRemoveService}
               onClose={closeModal}
             />
           )}
