@@ -17,6 +17,7 @@ export default function ServiceCard({ service, onBook }) {
       whileHover={{ scale: 1.02, y: -4 }}
       whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
+      onClick={handleClick}
       className={`${theme.cardBg} rounded-2xl shadow-lg shadow-rose-200/50 overflow-hidden border ${theme.border} cursor-pointer`}
     >
       <div className="h-56 overflow-hidden relative">
@@ -25,6 +26,7 @@ export default function ServiceCard({ service, onBook }) {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           src={service.image} 
           alt={service.title}
+          loading="lazy"
           className="w-full h-full object-cover"
         />
         {service.isPopular && (
@@ -47,7 +49,6 @@ export default function ServiceCard({ service, onBook }) {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.96 }}
-            onClick={handleClick}
             className="bg-gradient-to-r from-rose-400 to-rose-500 text-white px-6 py-2.5 rounded-full font-semibold shadow-md shadow-rose-300/50 hover:shadow-lg hover:shadow-rose-300/60 transition-all duration-300"
           >
             Записаться

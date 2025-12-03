@@ -3,11 +3,11 @@ import { businessConfig } from '../config/business';
 import { useRef } from 'react';
 
 const works = [
-  { id: 1, image: "https://image.pollinations.ai/prompt/close%20up%20luxury%20manicure%20nail%20art%20aesthetic%20photorealistic%208k?width=600&height=800&nologo=true", title: "Маникюр" },
-  { id: 2, image: "https://image.pollinations.ai/prompt/beautiful%20woman%20makeup%20close%20up%20luxury%20aesthetic%20photorealistic%208k?width=600&height=800&nologo=true", title: "Макияж" },
-  { id: 3, image: "https://image.pollinations.ai/prompt/woman%20hairstyle%20long%20hair%20salon%20aesthetic%20photorealistic%208k?width=600&height=800&nologo=true", title: "Укладка" },
-  { id: 4, image: "https://image.pollinations.ai/prompt/aesthetic%20pedicure%20feet%20spa%20flowers%20water%20luxury%20photorealistic%208k?width=600&height=800&nologo=true", title: "Педикюр" },
-  { id: 5, image: "https://image.pollinations.ai/prompt/spa%20massage%20setting%20candles%20flowers%20relaxing%20atmosphere%20aesthetic%20photorealistic%208k?width=600&height=800&nologo=true", title: "SPA" },
+  { id: 1, image: "https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&w=600&q=80", title: "Маникюр" },
+  { id: 2, image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=600&q=80", title: "Макияж" },
+  { id: 3, image: "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80", title: "Укладка" },
+  { id: 4, image: "https://images.unsplash.com/photo-1519415387722-a1c3bbef716c?auto=format&fit=crop&w=600&q=80", title: "Педикюр" },
+  { id: 5, image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&q=80", title: "SPA" },
 ];
 
 export default function Gallery() {
