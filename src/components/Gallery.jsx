@@ -3,11 +3,11 @@ import { businessConfig } from '../config/business';
 import { useRef } from 'react';
 
 const works = [
-  { id: 1, image: "https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&q=60&w=400", title: "Маникюр" },
-  { id: 2, image: "https://images.unsplash.com/photo-1596462502278-27bfdd403348?auto=format&fit=crop&q=60&w=400", title: "Макияж" },
-  { id: 3, image: "https://images.unsplash.com/photo-1522337360705-8b13d5a38602?auto=format&fit=crop&q=60&w=400", title: "Укладка" },
-  { id: 4, image: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&q=60&w=400", title: "Педикюр" },
-  { id: 5, image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=60&w=400", title: "SPA" },
+  { id: 1, image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=400", title: "Маникюр" },
+  { id: 2, image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=400", title: "Макияж" },
+  { id: 3, image: "https://images.unsplash.com/photo-1560869713-7d0a6394161b?auto=format&fit=crop&q=80&w=400", title: "Укладка" },
+  { id: 4, image: "https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&q=80&w=400", title: "Педикюр" },
+  { id: 5, image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=400", title: "SPA" },
 ];
 
 export default function Gallery() {

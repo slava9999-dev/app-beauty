@@ -32,7 +32,7 @@ export const businessConfig = {
       title: "Маникюр + Покрытие",
       price: 1800,
       description: "Аппаратный маникюр, выравнивание, покрытие гель-лак.",
-      image: "https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&q=80&w=600"
+      image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=600"
     },
     {
       id: 2,
@@ -40,14 +40,14 @@ export const businessConfig = {
       price: 3000,
       isPopular: true,
       description: "Стойкий образ для особого случая. Ресницы включены.",
-      image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=600"
+      image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=600"
     },
     {
       id: 3,
       title: "Укладка Локоны",
       price: 2000,
       description: "Голливудская волна или серф-локоны. Стайлинг премиум.",
-      image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=600"
+      image: "https://images.unsplash.com/photo-1560869713-7d0a6394161b?auto=format&fit=crop&q=80&w=600"
     }
   ]
 };
