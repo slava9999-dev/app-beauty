@@ -2,6 +2,7 @@ export const businessConfig = {
   name: "Velvet Beauty",
   telegramAdmin: "vyacheslav_admin", 
   currency: "₽",
+  phone: "+79990000000",
 
   // THEME: Soft Rose & Silk
   theme: {
@@ -15,7 +16,8 @@ export const businessConfig = {
   hero: {
     title: "Эстетика твоего образа",
     subtitle: "Маникюр, укладки и макияж. Ты прекрасна.",
-    emoji: "🌸"
+    emoji: "🌸",
+    locationUrl: "https://yandex.ru/maps"
   },
 
   loyalty: {
@@ -36,6 +38,7 @@ export const businessConfig = {
       id: 2,
       title: "Вечерний Макияж",
       price: 3000,
+      isPopular: true,
       description: "Стойкий образ для особого случая. Ресницы включены.",
       image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=800"
     },

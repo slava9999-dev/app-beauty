@@ -49,17 +49,33 @@ export default function Hero() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-lg md:text-2xl text-slate-600 leading-relaxed tracking-wide"
+          className="text-lg md:text-2xl text-slate-600 leading-relaxed tracking-wide mb-8"
         >
           {hero.subtitle}
         </motion.p>
+
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+        >
+          <a 
+            href={hero.locationUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-2.5 border-2 border-rose-400 text-rose-500 rounded-full font-semibold hover:bg-rose-50 transition-colors duration-300"
+          >
+            <span>📍</span>
+            Проложить маршрут
+          </a>
+        </motion.div>
 
         {/* Decorative line */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ delay: 0.6, duration: 0.8 }}
-          className="mt-8 mx-auto w-24 h-1 bg-gradient-to-r from-transparent via-rose-400 to-transparent rounded-full"
+          className="mt-12 mx-auto w-24 h-1 bg-gradient-to-r from-transparent via-rose-400 to-transparent rounded-full"
         />
       </div>
     </div>

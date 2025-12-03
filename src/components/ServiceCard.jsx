@@ -19,7 +19,7 @@ export default function ServiceCard({ service, onBook }) {
       transition={{ duration: 0.3, ease: 'easeOut' }}
       className={`${theme.cardBg} rounded-2xl shadow-lg shadow-rose-200/50 overflow-hidden border ${theme.border} cursor-pointer`}
     >
-      <div className="h-56 overflow-hidden">
+      <div className="h-56 overflow-hidden relative">
         <motion.img 
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -27,6 +27,11 @@ export default function ServiceCard({ service, onBook }) {
           alt={service.title}
           className="w-full h-full object-cover"
         />
+        {service.isPopular && (
+          <div className="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg flex items-center gap-1">
+            <span>🔥</span> ХИТ
+          </div>
+        )}
       </div>
       <div className="p-6">
         <h3 className={`text-xl font-bold mb-3 ${theme.text} tracking-wide`}>
