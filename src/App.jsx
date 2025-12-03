@@ -16,7 +16,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Имитация загрузки ресурсов
+    // Имитация загрузки ресурсов (Премиум эффект)
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -29,6 +29,10 @@ function App() {
 
   const closeModal = () => {
     setSelectedService(null);
+  };
+
+  const scrollToServices = () => {
+    document.getElementById('services-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -58,7 +62,10 @@ function App() {
               <h1 className={`text-2xl font-bold ${theme.text} tracking-widest font-serif`}>
                 {name}
               </h1>
-              <button className="text-sm font-medium text-rose-500 hover:text-rose-600 transition-colors tracking-wide">
+              <button 
+                onClick={scrollToServices}
+                className="text-sm font-medium text-rose-500 hover:text-rose-600 transition-colors tracking-wide"
+              >
                 МЕНЮ
               </button>
             </div>
@@ -68,7 +75,7 @@ function App() {
           <Hero />
 
           {/* Services Section */}
-          <section className="py-20 px-4">
+          <section id="services-section" className="py-20 px-4">
             <div className="max-w-7xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

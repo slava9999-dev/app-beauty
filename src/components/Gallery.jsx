@@ -1,24 +1,27 @@
 import { motion } from 'framer-motion';
 import { businessConfig } from '../config/business';
+import { useRef } from 'react';
 
 const works = [
-  { id: 1, image: "https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&q=80&w=400", title: "Маникюр" },
-  { id: 2, image: "https://images.unsplash.com/photo-1596462502278-27bfdd403348?auto=format&fit=crop&q=80&w=400", title: "Макияж" },
-  { id: 3, image: "https://images.unsplash.com/photo-1522337360705-8b13d5a38602?auto=format&fit=crop&q=80&w=400", title: "Укладка" },
-  { id: 4, image: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&q=80&w=400", title: "Педикюр" },
+  { id: 1, image: "https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&q=60&w=400", title: "Маникюр" },
+  { id: 2, image: "https://images.unsplash.com/photo-1596462502278-27bfdd403348?auto=format&fit=crop&q=60&w=400", title: "Макияж" },
+  { id: 3, image: "https://images.unsplash.com/photo-1522337360705-8b13d5a38602?auto=format&fit=crop&q=60&w=400", title: "Укладка" },
+  { id: 4, image: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&q=60&w=400", title: "Педикюр" },
+  { id: 5, image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=60&w=400", title: "SPA" },
 ];
 
 export default function Gallery() {
   const { theme } = businessConfig;
+  const scrollRef = useRef(null);
 
   return (
-    <section className="py-16 px-4 bg-white/50 backdrop-blur-sm">
+    <section className="py-16 bg-white/50 backdrop-blur-sm overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8 px-4"
         >
           <span className="text-rose-500 text-sm font-semibold tracking-widest uppercase mb-2 block">
             Портфолио
@@ -26,9 +29,15 @@ export default function Gallery() {
           <h2 className={`text-4xl font-bold ${theme.text} font-serif`}>
             Наши работы
           </h2>
+          <p className="text-slate-400 text-sm mt-2">Листайте вправо →</p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {/* Horizontal Scroll Container */}
+        <div 
+          ref={scrollRef}
+          className="flex overflow-x-auto gap-4 px-4 pb-8 snap-x snap-mandatory scrollbar-hide"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
           {works.map((work, index) => (
             <motion.div
               key={work.id}
@@ -36,16 +45,16 @@ export default function Gallery() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.03 }}
-              className="aspect-square rounded-2xl overflow-hidden shadow-md relative group cursor-pointer"
+              className="flex-shrink-0 w-64 h-80 rounded-2xl overflow-hidden shadow-lg relative group snap-center"
             >
               <img 
                 src={work.image} 
                 alt={work.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <span className="text-white font-medium tracking-wide">{work.title}</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                <span className="text-white font-medium tracking-wide text-lg">{work.title}</span>
               </div>
             </motion.div>
           ))}
