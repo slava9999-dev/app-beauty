@@ -32,7 +32,7 @@ export const businessConfig = {
       title: "Маникюр + Покрытие",
       price: 1800,
       description: "Аппаратный маникюр, выравнивание, покрытие гель-лак.",
-      image: "https://loremflickr.com/800/600/manicure,nails/all"
+      image: "https://image.pollinations.ai/prompt/close%20up%20luxury%20manicure%20soft%20pink%20nails%20aesthetic%20photorealistic%208k?width=800&height=600&nologo=true"
     },
     {
       id: 2,
@@ -40,14 +40,14 @@ export const businessConfig = {
       price: 3000,
       isPopular: true,
       description: "Стойкий образ для особого случая. Ресницы включены.",
-      image: "https://loremflickr.com/800/600/makeup,model/all"
+      image: "https://image.pollinations.ai/prompt/beautiful%20woman%20evening%20makeup%20luxury%20fashion%20portrait%20aesthetic%20photorealistic%208k?width=800&height=600&nologo=true"
     },
     {
       id: 3,
       title: "Укладка Локоны",
       price: 2000,
       description: "Голливудская волна или серф-локоны. Стайлинг премиум.",
-      image: "https://loremflickr.com/800/600/hairstyle,blonde/all"
+      image: "https://image.pollinations.ai/prompt/woman%20long%20wavy%20blonde%20hair%20luxury%20hairstyle%20back%20view%20aesthetic%20photorealistic%208k?width=800&height=600&nologo=true"
     }
   ]
 };
