@@ -1,6 +1,6 @@
 export const businessConfig = {
   name: "Velvet Beauty",
-  telegramAdmin: "vyacheslav_admin",
+  telegramAdmin: "vyacheslav_admin", 
   currency: "₽",
 
   // THEME: Soft Rose & Silk
@@ -9,19 +9,19 @@ export const businessConfig = {
     text: "text-slate-800", // Dark grey text for contrast
     accent: "bg-rose-400", // Dusty rose accent
     cardBg: "bg-white", // Clean white cards
-    border: "border-rose-200", // Soft border
+    border: "border-rose-200" // Soft border
   },
 
   hero: {
     title: "Эстетика твоего образа",
     subtitle: "Маникюр, укладки и макияж. Ты прекрасна.",
-    emoji: "🌸",
+    emoji: "🌸"
   },
 
   loyalty: {
     title: "Beauty Card",
     discount: "SPA",
-    description: "SPA-уход для рук в подарок при комплексе Маникюр + Педикюр.",
+    description: "SPA-уход для рук в подарок при комплексе Маникюр + Педикюр."
   },
 
   services: [
@@ -30,24 +30,21 @@ export const businessConfig = {
       title: "Маникюр + Покрытие",
       price: 1800,
       description: "Аппаратный маникюр, выравнивание, покрытие гель-лак.",
-      image:
-        "https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&q=80&w=800",
+      image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=800"
     },
     {
       id: 2,
       title: "Вечерний Макияж",
       price: 3000,
       description: "Стойкий образ для особого случая. Ресницы включены.",
-      image:
-        "https://images.unsplash.com/photo-1487412947132-28c63ee15fcd?auto=format&fit=crop&q=80&w=800",
+      image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=800"
     },
     {
       id: 3,
       title: "Укладка Локоны",
       price: 2000,
       description: "Голливудская волна или серф-локоны. Стайлинг премиум.",
-      image:
-        "https://images.unsplash.com/photo-1560869713-7d0a6394161b?auto=format&fit=crop&q=80&w=800",
-    },
-  ],
+      image: "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=800"
+    }
+  ]
 };

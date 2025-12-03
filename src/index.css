@@ -1,10 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
   font-weight: 400;
-
   color-scheme: light;
   
   font-synthesis: none;
@@ -13,11 +12,30 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', serif;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
+  background-color: #fff1f2; /* rose-50 fallback */
 }
 
-* {
-  box-sizing: border-box;
+/* Custom Scrollbar for Premium Feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff1f2; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fb7185; /* rose-400 */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f43f5e; /* rose-500 */
 }
