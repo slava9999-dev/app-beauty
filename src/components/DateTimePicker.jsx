@@ -37,6 +37,7 @@ export default function DateTimePicker({ value, onChange }) {
           value={datePart}
           onChange={handleDateChange}
           className="w-full px-4 py-3 border-2 border-rose-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400 transition-all accent-[#f43f5e] text-slate-800 bg-white placeholder:text-slate-400"
+          style={{ colorScheme: 'light' }}
           required
         />
       </motion.div>
