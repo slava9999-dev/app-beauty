@@ -63,6 +63,7 @@ export default function Hero() {
             href={hero.locationUrl} 
             target="_blank" 
             rel="noopener noreferrer"
+            onClick={() => navigator.vibrate && navigator.vibrate(5)}
             className="inline-flex items-center gap-2 px-6 py-2.5 border-2 border-rose-400 text-rose-500 rounded-full font-semibold hover:bg-rose-50 transition-colors duration-300"
           >
             <span>📍</span>
