@@ -48,3 +48,9 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
+/* Custom Date Picker Icon Color (Rose-500 approx) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(38%) sepia(48%) saturate(2366%) hue-rotate(315deg) brightness(95%) contrast(92%);
+}
