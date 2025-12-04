@@ -42,8 +42,17 @@ ${servicesList}
 
 💰 *Итого:* ${totalPrice} ${currency}
     `.trim();
+    
     const telegramUrl = `https://t.me/${telegramAdmin}?text=${encodeURIComponent(message)}`;
-    window.open(telegramUrl, '_blank');
+    
+    // Try to open in new tab first (desktop friendly)
+    const newWindow = window.open(telegramUrl, '_blank');
+    
+    // If popup blocked or on mobile where new tab might not trigger app, use location
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+        window.location.href = telegramUrl;
+    }
+    
     onClose();
   };
 

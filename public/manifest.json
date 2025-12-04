@@ -1,0 +1,21 @@
+{
+  "name": "Velvet Beauty",
+  "short_name": "Velvet",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff1f2",
+  "theme_color": "#fff1f2",
+  "description": "Эстетика твоего образа. Маникюр, укладки и макияж.",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/vite.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -3,11 +3,11 @@ import { businessConfig } from '../config/business';
 import { useRef } from 'react';
 
 const works = [
-  { id: 1, image: "https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&w=600&q=80", title: "Маникюр" },
-  { id: 2, image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=600&q=80", title: "Макияж" },
-  { id: 3, image: "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80", title: "Укладка" },
-  { id: 4, image: "https://images.unsplash.com/photo-1519415387722-a1c3bbef716c?auto=format&fit=crop&w=600&q=80", title: "Педикюр" },
-  { id: 5, image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&q=80", title: "SPA" },
+  { id: 1, image: "/images/gallery-manicure.jpg", title: "Маникюр" },
+  { id: 2, image: "/images/gallery-makeup.jpg", title: "Макияж" },
+  { id: 3, image: "/images/gallery-hair.jpg", title: "Укладка" },
+  { id: 4, image: "/images/gallery-pedicure.jpg", title: "Педикюр" },
+  { id: 5, image: "/images/gallery-spa.jpg", title: "SPA" },
 ];
 
 export default function Gallery() {

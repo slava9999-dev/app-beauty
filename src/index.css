@@ -39,3 +39,12 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #f43f5e; /* rose-500 */
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
